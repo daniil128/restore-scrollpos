@@ -1,16 +1,28 @@
-import styled from 'styled-components';
 
-const Page = styled.main`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
-  padding: 50vh 0;
-  overflow: auto;
-`;
+import React, { useEffect, useRef, useContext } from 'react'
+import { useLocation } from 'react-router-dom';
+import { ScrollContext } from '../context/scroll-context';
 
-export default Page;
+const Page = ({children, ...rest}) => {
+
+  const main = useRef();
+  const positions = useContext(ScrollContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (main.current) {
+      const position = positions.get(location.pathname);
+      if (position && position.top) {
+        main.current.scrollTop = position.top;
+      }
+    }
+  }, [])
+
+  return (
+    <main {...rest} ref={main}>
+      {children}
+    </main>
+  )
+}
+
+export default Page

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Page from '../components/Page';
 
 const About = () => (
-  <Page style={{ background: 'lightblue' }}>
+  <Page style={{ background: 'lightblue' }} id='page'>
     <h1>About</h1>
 
     <NavLink

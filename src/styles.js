@@ -22,4 +22,17 @@ export default createGlobalStyle`
     /* color: #ffffff; */
     overflow: hidden;
   }
+
+  main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding: 50vh 0;
+    overflow: auto;
+  }
 `;

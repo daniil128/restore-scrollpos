@@ -6,9 +6,12 @@ import { useTransition, animated } from 'react-spring';
 import GlobalStyles from './styles';
 import Home from './pages/Home';
 import About from './pages/About';
+import { useScrollPositions } from './hooks/scroll';
+import { ScrollContext } from './context/scroll-context';
 
 const App = () => {
   const location = useLocation();
+  const positions = useScrollPositions();
 
   const transitions = useTransition(location, {
     from: { opacity: 0, transform: 'translate3d(100vw, 0, 0)' },
@@ -17,9 +20,12 @@ const App = () => {
   });
 
   return (
-    <>
+    <ScrollContext.Provider value={positions}>
       <GlobalStyles />
-
+      <Switch>
+        <Route path='/' exact component={Home} />
+        <Route path="/about" component={About} />
+      </Switch>
       {transitions((props, item) => (
         <animated.div style={props}>
           <Switch location={item}>
@@ -28,7 +34,7 @@ const App = () => {
           </Switch>
         </animated.div>
       ))}
-    </>
+    </ScrollContext.Provider>
   );
 };
 
